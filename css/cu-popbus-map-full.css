@@ -1,0 +1,125 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*PACE-LOADING*/
+.pace .pace-progress {
+	background: rgba(224,75,63,1.00);
+}
+
+/*BODY*/
+body {
+	margin: 0px;
+	width: 100%;
+	height: 100%;
+	/*background: rgba(234,234,234,1.00) url(../images/pattern_bg.png) repeat;*/
+	overflow-x: hidden;
+	font-family: 'mulilight';
+	font-size: 18px;
+	letter-spacing: -2px;
+}
+
+.logo {
+	position: absolute;
+	width: 26px;
+	height: 30px;
+	left: 40px;
+	top: 50%;
+	margin-top: -15px;
+	background: url(../images/logo.png) no-repeat;
+}
+.logo-mover {
+	position: absolute;
+	width: 26px;
+	height: 30px;
+	left: 40px;
+	top: 50%;
+	margin-top: -15px;
+	background: url(../images/logo_mover.gif) no-repeat;
+	background-size: 26px 30px;
+	
+	opacity: 0;
+	visilibity: hidden;
+}
+
+.map-wrap {   
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	z-index: 0;
+	letter-spacing: 0px;
+}
+.map-wrap .map {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0px;
+	left: 0px;
+	z-index: 0;
+}
+.map-wrap .route {
+	position: absolute;
+	width: 100%;
+	height: 50px;
+	bottom: 0px;
+	z-index: 1;
+	background: rgba(255,255,255,0.60);
+	text-align: center;
+	
+	-moz-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+	-webkit-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+	
+}
+.map-wrap .route .rt {
+	display: inline-block;
+	width: 22px;
+	height: 25px;
+	margin: 12px 0 0 5px;
+	padding: 0 3px 0 0;
+	
+	font-family: 'muliregular';
+	font-size: 15px;
+	letter-spacing: -2px;
+	line-height: 25px;
+	text-align: center;
+
+	-webkit-border-radius: 100%;
+	-moz-border-radius: 100%;
+	border-radius: 100%;
+}
+.map-wrap .route .back {
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	top: 50%;
+	right: 40px;
+	margin-top: -10px;
+	background: url(../images/cu-popbus-map-full/back_icon.png) no-repeat;
+	background-size: 20px 20px;
+	
+	opacity: 0.75;
+}
+.map-wrap .route .border {
+	position: absolute;
+	width: 100%;
+	height: 4px;
+	top: 0px;
+	background: rgba(255,255,255,0.35);
+}
+.info_content {
+	font-family: 'muliregular';
+	font-size: 14px;
+	letter-spacing: -0.3px;
+	line-height: 23px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.bus-no {
+	float: left;
+	width: 7px;
+	height: 7px;
+	margin: 0 3px 0 0;
+	-webkit-border-radius: 100%;
+	-moz-border-radius: 100%;
+	border-radius: 100%;
+}

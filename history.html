@@ -1,0 +1,275 @@
+<!--[if lt IE 9]> <script src="js/html5shiv.js"></script> <![endif]-->
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>CU POP BUS | Travel Around Chulalongkorn University</title>
+<link rel="shortcut icon" href="favicon.png" />
+<link rel="stylesheet" type="text/css" href="css/history.css">
+<link rel="stylesheet" type="text/css" href="css/common.css">
+
+<script src="js/jquery-2.1.1.min.js"></script>
+<script src="js/greensock-v12-js/minified/TimelineMax.min.js"></script>
+<script src="js/greensock-v12-js/minified/TweenMax.min.js"></script>
+<script src="js/greensock-v12-js/minified/easing/EasePack.min.js"></script>
+<script src="js/modernizr.custom.59394.js"></script>
+<script src="js/jquery-waypoints-master/waypoints.min.js"></script>
+<script src="js/pace.min.js"></script>
+<script src="js/history.js"></script>
+<script src="js/common.js"></script>
+</head>
+
+<body class="menu-3">
+	<!--MENU-BAR-ON-TOP-->
+	<div class="menu-bar"> 
+    	<div class="container-menu-bar">
+        	<div class="pointer logo-mover"></div>
+        	<div class="pointer logo link-anchor" data-anchor=".header" data-offset="0"></div>
+         	<nav class="menu">
+            	<a href="contact.html" target="_self"><div class="m pointer m-5"><b>CONTACT</b></div></a>
+                <a href="review.html" target="_self"><div class="m pointer m-4"><b>REVIEW</b></div></a>
+               	<a href="history.html" target="_self"> <div class="m pointer m-3"><b>HISTORY</b></div></a>
+                <a href="application.html" target="_self"><div class="m pointer m-2"><b>APPLICATION</b></div></a>
+            	<a href="index.html" target="_self"><div class="m pointer m-1"><b>CU POP BUS</b></div></a>
+            </nav>
+            <div class="contact-element">
+            	<a href="https://www.facebook.com/ChulaPopBusApp" target="new"><div class="ce pointer ce-1" data-color="rgba(14,90,215,1.00)" style="left: 0px;">
+                	<div class="ce-non-active" style="background: url(images/contact_element_sprites.png) 0px 0px"></div>
+                    <div class="ce-active" style="background: url(images/contact_element_sprites.png) 0px -18px"></div>
+                </div></a>
+                <a href="https://itunes.apple.com/th/app/cupopbus/id824843908?l=th&mt=8" target="_blank"><div class="ce pointer ce-2" data-color="rgba(0,252,255,1.00)" style="left: 27px;">
+                	<div class="ce-non-active" style="background: url(images/contact_element_sprites.png) -18px 0px"></div>
+                    <div class="ce-active" style="background: url(images/contact_element_sprites.png) -18px -18px"></div>
+                </div></a>
+                <a href="https://play.google.com/store/apps/details?id=com.iseinc.cupopbus&hl=th" target="_blank"><div class="ce pointer ce-3" data-color="rgba(255,222,0,1.00)" style="left: 54px;">
+                	<div class="ce-non-active" style="background: url(images/contact_element_sprites.png) -36px 0px"></div>
+                    <div class="ce-active" style="background: url(images/contact_element_sprites.png) -36px -18px"></div>
+                </div></a>
+            </div>   
+        </div>
+        <div class="darken-bg-border"></div>
+        <div class="darken-bg"></div>
+    </div>
+    
+    <!--MENU-BAR-FIXED-->
+    <div class="menu-bar menu-bar-fixed">
+    	<div class="container-menu-bar">
+        	<div class="pointer logo-mover"></div>
+        	<div class="pointer logo link-anchor" data-anchor=".header" data-offset="0"></div>
+         	<nav class="menu">
+            	<a href="contact.html" target="_self"><div class="m pointer m-5"><b>CONTACT</b></div></a>
+                <a href="review.html" target="_self"><div class="m pointer m-4"><b>REVIEW</b></div></a>
+               	<a href="history.html" target="_self"> <div class="m pointer m-3"><b>HISTORY</b></div></a>
+                <a href="application.html" target="_self"><div class="m pointer m-2"><b>APPLICATION</b></div></a>
+            	<a href="index.html" target="_self"><div class="m pointer m-1"><b>CU POP BUS</b></div></a>
+            </nav>
+            <div class="contact-element">
+            	<a href="https://www.facebook.com/ChulaPopBusApp" target="new"><div class="ce pointer ce-1" data-color="rgba(14,90,215,1.00)" style="left: 0px;">
+                	<div class="ce-non-active" style="background: url(images/contact_element_sprites.png) 0px 0px"></div>
+                    <div class="ce-active" style="background: url(images/contact_element_sprites.png) 0px -18px"></div>
+                </div></a>
+                <a href="https://itunes.apple.com/th/app/cupopbus/id824843908?l=th&mt=8" target="_blank"><div class="ce pointer ce-2" data-color="rgba(0,252,255,1.00)" style="left: 27px;">
+                	<div class="ce-non-active" style="background: url(images/contact_element_sprites.png) -18px 0px"></div>
+                    <div class="ce-active" style="background: url(images/contact_element_sprites.png) -18px -18px"></div>
+                </div></a>
+                <a href="https://play.google.com/store/apps/details?id=com.iseinc.cupopbus&hl=th" target="_blank"><div class="ce pointer ce-3" data-color="rgba(255,222,0,1.00)" style="left: 54px;">
+                	<div class="ce-non-active" style="background: url(images/contact_element_sprites.png) -36px 0px"></div>
+                    <div class="ce-active" style="background: url(images/contact_element_sprites.png) -36px -18px"></div>
+                </div></a>
+            </div>   
+        </div>
+        <div class="darken-bg-border"></div>
+        <div class="darken-bg" style="background: rgba(0,0,0,0.75)"></div>
+    </div>
+    <div class="wrapper">
+        <header class="header">
+            <div class="container-header">
+                <ul id="scene-1" class="scene-1" style="z-index: 4;">
+               	 	<li class="layer" id="layer-3" data-depth="0.09"><div class="leaf-3"></div></li>
+                    <li class="layer" id="layer-4" data-depth="0.00"><div class="pop-bus-illus"></div></li>
+                    <li class="layer" id="layer-1" data-depth="0.30"><div class="leaf-1"></div></li>
+                    <li class="layer" id="layer-2" data-depth="-0.15"><div class="leaf-2"></div></li>
+                </ul>
+                <div class="content">
+                  <div class="text-1 nowrap"><b>GREAT APP</b></div>
+                    <div class="text-2 nowrap">WASN'T BUILT IN A DAY</div>
+                    <div class="line" style="position: absolute; width: 257px; height: 2px; top: 85px; background: rgba(255,255,255,0.80);"></div>
+                    <div class="text-3">Unveil the secret behind the success of CU POP BUS application</div>
+                    <div class="circle" style="position: absolute; width: 8px; height: 8px; top: 163px; left: 50%; margin-left: -4px; -webkit-border-radius: 100%; -moz-border-radius: 100%; border-radius: 100%; background: rgba(255,255,255,0.80);"></div>
+                    <div class="button pointer nowrap link-anchor" data-anchor=".sc-1" data-offset="50"><b>DISCOVER NOW</b></div>
+                </div>
+                
+                
+            </div>
+            <div class="border"></div>
+            <div class="menu-blur-bg"></div>
+            <div class="darken-bg"></div>
+        </header>
+        
+        <section class="sc-1">
+            <div class="container-sc-1">
+                <div class="go-to-sc pointer go-to-sc-2 link-anchor" data-anchor=".sc-2" data-offset="100">
+                    <div class="icon-topic" style="background: url(images/icon.png) 0 -140px no-repeat;"></div>
+                    <div class="text-1 nowrap"><b>OUR HISTORY</b></div>
+                    <div class="text-2 nowrap">How long have we developed?</div>
+                    <div class="button nowrap" style="width: 200px; left: 50%; margin-left: -113px;"><b>LET'S SEE ON OUR TIMELINE</b></div>
+                </div>
+                <div class="go-to-sc pointer go-to-sc-3 link-anchor" data-anchor=".sc-3" data-offset="-20">
+                    <div class="icon-topic" style="background: url(images/icon.png) -70px -140px no-repeat;"></div>
+                    <div class="text-1" style="font-size: 19px; top:45px;"><b>PHASE DEVELOPMENT</b></div>
+                    <div class="text-2" style="top:45px;">What we do in each phase</div>
+                    <div class="button nowrap" style="width: 185px; left: 50%; margin-left: -103px; top: 64px;"><b>VIEW OUR DEVELOPMENT</b></div>
+    
+                </div>
+    
+                <div class="go-to-sc pointer go-to-sc-4 link-anchor" data-anchor=".sc-4" data-offset="-20">
+                    <div class="icon-topic" style="background: url(images/icon.png) -140px -140px no-repeat;"></div>
+                    <div class="text-1" style="letter-spacing: -2px; font-size: 20px; top: 43px;"><b>WHO IS DEVELOPER?</b></div>
+                    <div class="text-2">Who made the app?</div>
+                    <div class="button nowrap" style="width: 180px; left: 50%; top:62px; margin-left: -103px;"><b>MEET OUR TEAM</b></div>
+    
+                </div>
+    
+          </div>
+        </section>
+        
+        <section class="sc-2">
+            <div class="container-sc-2">
+                <div class="icon-topic" style="background: url(images/icon.png) 0 -140px no-repeat;"></div>
+                <div class="timeline"></div>
+                
+                <div class="circle" style="position: absolute; width: 12px; height: 12px; top: 190px; left: 50%; margin-left: -4px; -webkit-border-radius: 100%; -moz-border-radius: 100%; border-radius: 100%; background: rgba(148,26,26,1);"></div>
+                    <div class="descript1"><b style="color: rgba(148,26,26,1);">AUG  2013</b><div class="word1">The project was born</div>
+                    </div>
+                    
+    
+                <div class="circle" style="position: absolute; width: 12px; height: 12px; top: 350px; left: 50%; margin-left: 6.8px; -webkit-border-radius: 100%; -moz-border-radius: 100%; border-radius: 100%; background: rgba(148,26,26,1);"></div>
+                    <div class="descript2"><b style="color: rgba(148,26,26,1);">MAR  2014</b><div class="word2">CU popbus phase 1 released</div>
+                    </div>
+                <div class="circle" style="position: absolute; width: 12px; height: 12px; top: 510px; left: 50%; margin-left: 18px; -webkit-border-radius: 100%; -moz-border-radius: 100%; border-radius: 100%; background: rgba(148,26,26,1);"></div>
+                    <div class="descript3"><b style="color: rgba(148,26,26,1);">MAR  2014</b><div class="word3">Focus group I</div>
+                    </div>
+    
+                <div class="circle" style="position: absolute; width: 12px; height: 12px; top: 670px; left: 50%; margin-left: 30px; -webkit-border-radius: 100%; -moz-border-radius: 100%; border-radius: 100%; background: rgba(148,26,26,1);"></div>
+                    <div class="descript4"><b style="color: rgba(148,26,26,1);">JUL  2013</b><div class="word4">CU Popbus phase 2 released</div>
+                    </div>
+    
+                <div class="circle" style="position: absolute; width: 12px; height: 12px; top: 830px; left: 50%; margin-left: 41px; -webkit-border-radius: 100%; -moz-border-radius: 100%; border-radius: 100%; background: rgba(148,26,26,1);"></div>
+                    <div class="descript5"><b style="color: rgba(148,26,26,1);">TBA  </b><div class="word5">Popbus phase 3 released</div>
+                    </div>
+                <div class="illus1"></div>
+                <div class="illus2"></div>
+                <div class="illus3"></div>
+                <div class="illus4"></div>
+                <div class="illus5"></div>
+    
+            </div>
+            <div class="divide-bg"></div>
+        </section>
+        
+        <section class="sc-3">
+            <div class="container-sc-3">
+                <div class="topic">
+                    <div class="icon"></div>
+                    <div class="text-up nowrap">What we do in each phase </div>
+                    <div class="text-down nowrap"><b>PHASE DEVELOPMENT</b></div>
+                </div>
+    
+                <div class="blog1" ><div class="line" style="background: rgba(208,58,203,1.00);"></div>
+                <b style="color: rgba(208,58,203,1.00);"><h2>Phase I</h2></b><br>
+    				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1) Menu Sliding <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2) Feedback Page <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3) GPS & Compass <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4) Bus Tracking (Animated) <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5) Bus Line Button <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6) Loading (Splash) Screen <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;7) App Icon <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;8) Database App (Store route/station in the app) ? <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10) Google Map <br>
+    </div>
+                <div class="blog2"><div class="line"></div>
+                <b style="color: rgba(227,89,78,1.00);"><h2>Phase II</h2></b><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1) Search Feature<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2) Nearest Bus Station<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3) Setting Page<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4) About Us Page<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5) Help Page<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6) Landmarking/Building <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;7) Code Cleaning <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;8) Design Above Topics<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;9) Our Database Setup (Store route and building detail on the server)<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10) Database Fetching <br>
+    </div>
+                <div class="blog3"><div class="line"></div>
+                <b style="color: rgba(248,154,44,1.00);"><h2>Future plan</h2></b><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Estimated Time Arrival of PopBuses<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- A more detailed search system of buildings within Chulalongkorn University
+    
+                </div>
+                
+            </div>
+            <div class="divide-bg"></div>
+        </section>
+    
+    <!-- section4 is editor area-->
+    <section class="sc-4">
+            <div class="container-sc-4">
+                
+                <div class="topic">
+                    <div class="icon"></div>
+                    <div class="text-up nowrap">Who made app?? </div>
+                    <div class="text-down nowrap"><b>WHO IS DEVELOPER?</b></div>
+                </div>
+                <div class="desc">The team consists of roughly 20 members, sub-divided into three specialties: coders, designers, and business developers.In the summer of 2013, Thinc, initially started Chula PopBus App with the aim of solving a real-world problem through a project which has large-scale impact. After 20,000 downloads (as of mid-2014) and counting, Thinc. hopes it has.</div>
+            <a href="https://www.facebook.com/aey.ulo?fref=ts" target="_blank"><div class="pointer edit edit-1">
+              <div class="darken"><img style="position:absolute; width:35; height:35px; top:50%; left:50%; margin:-17.5px 0 0 -17.5px; opacity:0;" src="images/contact/facebook.png" width="35" height="35" alt=""/></div></div></a>
+            <a href="https://www.facebook.com/aum.freek?fref=ts" target="_blank"><div class="pointer edit edit-2"><div class="darken"><img style="position:absolute; width:35; height:35px; top:50%; left:50%; margin:-17.5px 0 0 -17.5px; opacity:0;" src="images/contact/facebook.png" width="35" height="35" alt=""/></div></div></a>
+            <a href="https://www.facebook.com/benya.vachalathiti?fref=ts" target="_blank"><div class="pointer edit edit-3"><div class="darken"><img style="position:absolute; width:35; height:35px; top:50%; left:50%; margin:-17.5px 0 0 -17.5px; opacity:0;" src="images/contact/facebook.png" width="35" height="35" alt=""/></div></div></a>
+            <a href="https://www.facebook.com/IndyZaIntouch?fref=ts" target="_blank"><div class="pointer edit edit-4"><div class="darken"><img style="position:absolute; width:35; height:35px; top:50%; left:50%; margin:-17.5px 0 0 -17.5px; opacity:0;" src="images/contact/facebook.png" width="35" height="35" alt=""/></div></div></a>
+            <a href="https://www.facebook.com/DuiRoot?fref=ts" target="_blank"><div class="pointer edit edit-c"><div class="darken"><img style="position:absolute; width:35; height:35px; top:50%; left:50%; margin:-17.5px 0 0 -17.5px; opacity:0;" src="images/contact/facebook.png" width="35" height="35" alt=""/></div></div></a>
+            <a href="https://www.facebook.com/PavidaIntatisan?fref=ts" target="_blank"><div class="pointer edit edit-d"><div class="darken"><img style="position:absolute; width:35; height:35px; top:50%; left:50%; margin:-17.5px 0 0 -17.5px; opacity:0;" src="images/contact/facebook.png" width="35" height="35" alt=""/></div></div></a>
+            
+            <a href="https://www.facebook.com/srepzol?fref=ts" target="_blank"><div class="pointer edit edit-5"><div class="darken"><img style="position:absolute; width:35; height:35px; top:50%; left:50%; margin:-17.5px 0 0 -17.5px; opacity:0;" src="images/contact/facebook.png" width="35" height="35" alt=""/></div></div></a>
+            <a href="https://www.facebook.com/pheerawit.charuvajana?fref=ts" target="_blank"><div class="pointer edit edit-6"><div class="darken"><img style="position:absolute; width:35; height:35px; top:50%; left:50%; margin:-17.5px 0 0 -17.5px; opacity:0;" src="images/contact/facebook.png" width="35" height="35" alt=""/></div></div></a>
+            <a href="https://www.facebook.com/ping.skt?fref=ts" target="_blank"><div class="pointer edit edit-7"><div class="darken"><img style="position:absolute; width:35; height:35px; top:50%; left:50%; margin:-17.5px 0 0 -17.5px; opacity:0;" src="images/contact/facebook.png" width="35" height="35" alt=""/></div></div></a>
+            <a href="https://www.facebook.com/PlanTrongsiriwat?fref=ts" target="_blank"><div class="pointer edit edit-a"><div class="darken"><img style="position:absolute; width:35; height:35px; top:50%; left:50%; margin:-17.5px 0 0 -17.5px; opacity:0;" src="images/contact/facebook.png" width="35" height="35" alt=""/></div></div></a>
+            <a href="https://www.facebook.com/PonlavitSubpradit?fref=ts" target="_blank"><div class="pointer edit edit-b"><div class="darken"><img style="position:absolute; width:35; height:35px; top:50%; left:50%; margin:-17.5px 0 0 -17.5px; opacity:0;" src="images/contact/facebook.png" width="35" height="35" alt=""/></div></div></a>
+            
+            <a href="https://www.facebook.com/tan.ananthothai?fref=ts" target="_blank"><div class="pointer edit edit-8"><div class="darken"><img style="position:absolute; width:35; height:35px; top:50%; left:50%; margin:-17.5px 0 0 -17.5px; opacity:0;" src="images/contact/facebook.png" width="35" height="35" alt=""/></div></div></a>
+            <a href="https://www.facebook.com/tan.ophaswongse?fref=ts" target="_blank"><div class="pointer edit edit-9"><div class="darken"><img style="position:absolute; width:35; height:35px; top:50%; left:50%; margin:-17.5px 0 0 -17.5px; opacity:0;" src="images/contact/facebook.png" width="35" height="35" alt=""/></div></div></a>
+            <a href="https://www.facebook.com/termerys?fref=ts" target="_blank"><div class="pointer edit edit-0"><div class="darken"><img style="position:absolute; width:35; height:35px; top:50%; left:50%; margin:-17.5px 0 0 -17.5px; opacity:0;" src="images/contact/facebook.png" width="35" height="35" alt=""/></div></div></a>
+            <a href="https://www.facebook.com/TanawitPananiti?fref=ts" target="_blank"><div class="pointer edit edit-e"><div class="darken"><img style="position:absolute; width:35; height:35px; top:50%; left:50%; margin:-17.5px 0 0 -17.5px; opacity:0;" src="images/contact/facebook.png" width="35" height="35" alt=""/></div></div></a>
+    
+            </div>
+            
+            <div class="divide-bg"></div>
+    	</section>
+		<div class="push"></div>
+    </div>
+
+    <footer class="footer">
+    	<div class="container-footer">
+        	<div class="thinc-logo"></div>
+            <div class="text-1"><span style="font-size:16px;"><b>FACULTY OF ENGINEERING, CHULALONGKORN UNIVERSITY</b></span><br><span style="font-size:14px; letter-spacing: -0.8px">PHAYATHAI ROAD, PATUMWAN, BANGKOK, THAILAND 10330</span><br><span style="font-size: 12px; letter-spacing: -0.2px;">COPYRIGHT © 2014 Thinc. ALL RIGHTS RESERVED.</span></div>
+        </div>
+    	<div class="border"></div>
+        <div class="darken-bg"></div>
+    </footer>
+    
+    <!--This Parallax Script must be next to <ul id="scene">-->
+	<script src="js/parallax-master/deploy/jquery.parallax.min.js"></script>
+    <script>
+        $("#scene-1").parallax();
+    </script>
+    <script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		 
+		  ga('create', 'UA-42353426-4', 'auto');
+		  ga('send', 'pageview');
+		 
+    </script>
+</body>
+</html>
