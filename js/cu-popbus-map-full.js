@@ -1,5 +1,10 @@
 // JavaScript Document
-$(document).ready(function() {	
+Parse.initialize("egbuQBruXEK6g00FQgUxC9qj8C4t1soS839nTX8p", "2hVdRsd4QmioSo5tk05u3IA0Nh2xCkhNF13FKhae");
+
+$(document).ready(function() {
+
+
+
 	$(".logo").on("mouseenter", function() {
 		TweenMax.to($(this), 0.5, {autoAlpha: 0, ease:Quad.easeOut});
 		TweenMax.to($(".logo-mover"), 0.5, {autoAlpha: 1, ease:Quad.easeOut});
@@ -8,7 +13,7 @@ $(document).ready(function() {
 		TweenMax.to($(this), 0.5, {autoAlpha: 1, ease:Quad.easeOut});
 		TweenMax.to($(".logo-mover"), 0.5, {autoAlpha: 0, ease:Quad.easeOut});
 	});
-	
+
 	$(".map-wrap .route .back").on("mouseenter", function() {
 		TweenMax.to($(this), 0.3, {autoAlpha: 1, ease:Quad.easeOut});
 	});
@@ -18,7 +23,7 @@ $(document).ready(function() {
 
 	//GOOGLE-MAP-API
 	var active_route = [1, 1, 1, 1, 1, 1];
-	
+
 	var bus_color = [
 		'rgba(224,75,63,1.00)',
 		'rgba(51,119,219,1.00)',
@@ -27,13 +32,21 @@ $(document).ready(function() {
 		'rgba(168,30,202,1.00)',
 		'rgba(226,90,194,1.00)',
 	];
-	
+
 	var map;
-	
+	var map_canvas = document.getElementById('map-canvas');
+	var map_options = {
+		center: new google.maps.LatLng(13.739036, 100.529875),
+		zoom: 16,
+		scrollwheel: true,
+		mapTypeId: google.maps.MapTypeId.ROADMAP
+	}
+	map = new google.maps.Map(map_canvas, map_options);
+
 	// Display multiple markers on a map
     var infoWindow = new google.maps.InfoWindow(), marker, i, j;
 	var allMarkers = [];
-	
+
 	var markers = [
         ['Salaprakeaw', 13.735581,100.531774,1,2,3,4,5,6],
         ['Faculty of Political Science', 13.734346,100.532809,1,0,3,4,0,0],
@@ -67,7 +80,7 @@ $(document).ready(function() {
     ];
 
     var infoWindowContent = [];
-	
+
 	var routeCoordinates_1 = [
 		//START AT HENRI DUNANT INTERSECTION
 		new google.maps.LatLng(13.745209,100.535781),
@@ -91,7 +104,7 @@ $(document).ready(function() {
 		new google.maps.LatLng(13.745209,100.535781)
 		//END
 	];
-	
+
 	var routeCoordinates_2 = [
 		new google.maps.LatLng(13.737400,100.531908),
 		new google.maps.LatLng(13.734647,100.531537),
@@ -169,7 +182,7 @@ $(document).ready(function() {
 		new google.maps.LatLng(13.737400,100.531908)
 		//END
 	];
-	
+
 	var routeCoordinates_3 = [
 		new google.maps.LatLng(13.737400,100.531958),
 		new google.maps.LatLng(13.734467,100.531587),
@@ -216,7 +229,7 @@ $(document).ready(function() {
 		new google.maps.LatLng(13.737400,100.531958)
 		//END
 	];
-	
+
 	var routeCoordinates_4 = [
 		//START HENRI DUNANT INTERSECTION
 		new google.maps.LatLng(13.745269,100.535861),
@@ -250,7 +263,7 @@ $(document).ready(function() {
 		new google.maps.LatLng(13.745269,100.535861),
 		//END
 	];
-	
+
 	var routeCoordinates_5 = [
 		new google.maps.LatLng(13.742356, 100.525878),
 		new google.maps.LatLng(13.739790, 100.525384),
@@ -283,7 +296,7 @@ $(document).ready(function() {
 		//END CRUVE
 		//END
 	];
-	
+
 	var routeCoordinates_6 = [
 		new google.maps.LatLng(13.742356, 100.525808),
 		new google.maps.LatLng(13.739670, 100.525304),
@@ -317,7 +330,7 @@ $(document).ready(function() {
 		//END CRUVE
 		//END
 	];
-	
+
 	var routePath_1 = new google.maps.Polyline({
 		path: routeCoordinates_1,
 		geodesic: true,
@@ -325,7 +338,7 @@ $(document).ready(function() {
 		strokeOpacity: 1.0,
 		strokeWeight: 3
 	});
-	
+
 	var routePath_2 = new google.maps.Polyline({
 		path: routeCoordinates_2,
 		geodesic: true,
@@ -333,7 +346,7 @@ $(document).ready(function() {
 		strokeOpacity: 1.0,
 		strokeWeight: 3
 	});
-	
+
 	var routePath_3 = new google.maps.Polyline({
 		path: routeCoordinates_3,
 		geodesic: true,
@@ -341,7 +354,7 @@ $(document).ready(function() {
 		strokeOpacity: 1.0,
 		strokeWeight: 3
 	});
-	
+
 	var routePath_4 = new google.maps.Polyline({
 		path: routeCoordinates_4,
 		geodesic: true,
@@ -349,7 +362,7 @@ $(document).ready(function() {
 		strokeOpacity: 1.0,
 		strokeWeight: 3
 	});
-	
+
 	var routePath_5 = new google.maps.Polyline({
 		path: routeCoordinates_5,
 		geodesic: true,
@@ -357,7 +370,7 @@ $(document).ready(function() {
 		strokeOpacity: 1.0,
 		strokeWeight: 3
 	});
-	
+
 	var routePath_6 = new google.maps.Polyline({
 		path: routeCoordinates_6,
 		geodesic: true,
@@ -365,7 +378,7 @@ $(document).ready(function() {
 		strokeOpacity: 1.0,
 		strokeWeight: 3
 	});
-	
+
 	var icon = {
 		path: "M-20,0a20,20 0 1,0 40,0a20,20 0 1,0 -40,0",
 		fillColor: '#FFFFFF',
@@ -374,8 +387,9 @@ $(document).ready(function() {
 		strokeWeight: 1.5,
 		scale: 0.17
 	}
-	
+
 	function initialize() {
+		/*
 		var map_canvas = document.getElementById('map-canvas');
 		var map_options = {
 			center: new google.maps.LatLng(13.739036, 100.529875),
@@ -384,20 +398,21 @@ $(document).ready(function() {
 			mapTypeId: google.maps.MapTypeId.ROADMAP
 		}
 		map = new google.maps.Map(map_canvas, map_options);
-		
+		*/
+
 		var string;
 		for( i = 0; i < markers.length; i++ ) {
 			string = '';
 			for( j = 0; j < 6; j++) {
 				if(markers[i][j+3] != 0)
 					string += '<div class="bus-no" style="border: 1px solid ' + bus_color[j] + '; background: ' + bus_color[j] + ';"></div>';
-				else 
+				else
 					string += '<div class="bus-no" style="border: 1px solid rgba(0,0,0,0.60); background: transparent;"></div>';
 			}
 			infoWindowContent[i] = '<div class="info_content">' + markers[i][0] + '<br>' + string + '</div>';
 		}
 
-		// Loop through our array of markers & place each one on the map  
+		// Loop through our array of markers & place each one on the map
 		for( i = 0; i < markers.length; i++ ) {
 			var position = new google.maps.LatLng(markers[i][1], markers[i][2]);
 			marker = new google.maps.Marker({
@@ -408,8 +423,8 @@ $(document).ready(function() {
 			});
 			marker.setMap(map);
 			allMarkers.push(marker);
-			
-			// Allow each marker to have an info window    
+
+			// Allow each marker to have an info window
 			google.maps.event.addListener(marker, 'click', (function(marker, i) {
 				return function() {
 					infoWindow.setContent(infoWindowContent[i]);
@@ -417,12 +432,12 @@ $(document).ready(function() {
 				}
 			})(marker, i));
 		}
-		
+
 		for( i = 1; i <= 6; i++)
 			addPath(i);
 		//markers.setMap(map);
 	}
-	
+
 	function addPath(route) {
 		if(route == 1)		routePath_1.setMap(map);
 		else if(route == 2) routePath_2.setMap(map);
@@ -431,7 +446,7 @@ $(document).ready(function() {
 		else if(route == 5)	routePath_5.setMap(map);
 		else if(route == 6)	routePath_6.setMap(map);
 	}
-	
+
 	function removePath(route) {
 		if(route == 1)		routePath_1.setMap(null);
 		else if(route == 2) routePath_2.setMap(null);
@@ -440,7 +455,7 @@ $(document).ready(function() {
 		else if(route == 5)	routePath_5.setMap(null);
 		else if(route == 6)	routePath_6.setMap(null);
 	}
-	
+
 	/*function updateMark() {
 		for( i = 0; i < allMarkers.length; i++)
 			allMarkers[i].setMap(null);
@@ -457,8 +472,8 @@ $(document).ready(function() {
 						});
 						marker.setMap(map);
 						//allMarkers.push(marker);
-						
-						// Allow each marker to have an info window    
+
+						// Allow each marker to have an info window
 						google.maps.event.addListener(marker, 'click', (function(marker, i) {
 							return function() {
 								infoWindow.setContent(infoWindowContent[i]);
@@ -470,14 +485,14 @@ $(document).ready(function() {
 			}
 		}
 	}*/
-	
+
 	function updateMarkAdd(route) {
 		var intRoute = parseInt(route);
 		var sentinel;
 		for( i = 0; i < markers.length; i++ ) {
 			if(markers[i][intRoute+2] != 0) {
 				sentinel = 0;
-				for( j = 0; j < 6 ; j++) {	
+				for( j = 0; j < 6 ; j++) {
 					if(active_route[j] == 1 && markers[i][j+3] != 0 && j != intRoute-1) {
 						sentinel = 1;
 					}
@@ -488,14 +503,14 @@ $(document).ready(function() {
 			}
 		}
 	}
-	
+
 	function updateMarkRemove(route) {
 		var intRoute = parseInt(route);
 		var sentinel;
 		for( i = 0; i < markers.length; i++ ) {
 			if(markers[i][intRoute+2] != 0) {
 				sentinel = 0;
-				for( j = 0; j < 6 ; j++) {	
+				for( j = 0; j < 6 ; j++) {
 					if(active_route[j] == 1 && markers[i][j+3] != 0) {
 						sentinel = 1;
 					}
@@ -506,10 +521,10 @@ $(document).ready(function() {
 			}
 		}
 	}
-	
+
 	google.maps.event.addDomListener(window, 'load', initialize);
-	
-	
+
+
 	//MAP
 	$(".map-wrap .route .rt").on("click", function() {
 		var a=$(this).data("color");
@@ -541,6 +556,67 @@ $(document).ready(function() {
 			else if(c[0] == 6) 	removePath(6);
 			updateMarkRemove(c[0]);
 		}
-		
+
 	});
+	//==================================== Nai MarkerPart =====================================
+	function parseStringToInt(string){
+		var numStr = '';
+		for(var i = 0 ; i <= string.length ; i++){
+			if((string[i] >= '0' && string[i] <= '9')||string[i]=='.'){
+					numStr += string[i];
+			}
+		}
+		return parseFloat(numStr);
+	}
+
+	function createMarker(json){
+		for(var i = 0; i < json.length; i++){
+			var str = json[i].LatLng;
+			var split = str.split(",");
+			var latLngObj = {lat:parseStringToInt(split[0]),lng:parseStringToInt(split[1])};
+			addBusMarker(i,latLngObj);
+		}
+	}
+
+	function addBusMarker(num,latLng){
+			busMarker[num] = new google.maps.Marker({
+			position: latLng,
+			map: map,
+			title: 'Hello World!',
+		});
+	}
+	function loadData(callback) {
+		Parse.Cloud.run('getBusNow').then(function(data) {
+			// Data loading success!!!
+			callback(JSON.parse(data));
+		}, function(error) {
+			// Data loading fail
+			callback(null);
+		});
+	}
+
+	var busMarker = [];
+
+	loadData(function(data) {
+		if (data === null) {
+			// Data loading fail
+			console.log("Loading Failed");
+			return;
+		}
+		else {
+			createMarker(data)
+		}
+	});
+
+	setInterval(function(){
+		loadData(function(data){
+			if(data === null){
+				console.log("Loading Failed");
+			}
+			else{
+				//moveMarker(data);
+			}
+		});
+	},10*1000);
+
 });
