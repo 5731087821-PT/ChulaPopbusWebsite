@@ -559,9 +559,11 @@ $(document).ready(function() {
 
 	});
 	//==================================== Nai MarkerPart =====================================
+	var busMarkers = [];
+
 	function parseStringToInt(string){
 		var numStr = '';
-		for(var i = 0 ; i <= string.length ; i++){
+		for(var i = 0 ; i < string.length ; i++){
 			if((string[i] >= '0' && string[i] <= '9')||string[i]=='.'){
 					numStr += string[i];
 			}
@@ -571,20 +573,62 @@ $(document).ready(function() {
 
 	function createMarker(json){
 		for(var i = 0; i < json.length; i++){
+
 			var str = json[i].LatLng;
 			var split = str.split(",");
 			var latLngObj = {lat:parseStringToInt(split[0]),lng:parseStringToInt(split[1])};
-			addBusMarker(i,latLngObj);
+
+			console.log(latLngObj);
+			//if(latLngObj.lat === 0 && latLngObj.lng === 0)continue;
+			busMarkers.push(addBusMarker(i,latLngObj));
+			busMarkers[i].IMEI = json[i].IMEI;
+			busMarkers[i].lineNo = json[i].LineNo;
+			busMarkers[i].num = i;
+
+			console.log(json[i].IMEI);
+			//console.log(addBusMarker("BusNo"+i,latLngObj));
 		}
 	}
 
 	function addBusMarker(num,latLng){
-			busMarker[num] = new google.maps.Marker({
+			return new google.maps.Marker({
 			position: latLng,
 			map: map,
-			title: 'Hello World!',
+			title: ''+num,
 		});
 	}
+	function moveAnimation(busMarker,newLatLngObj){
+		var latLngObj = busMarker.getPosition();
+		if(typeof(latLngObj) === 'undefined')return;
+		var disLat = newLatLngObj.lat - latLngObj.lat();
+		var disLng = newLatLngObj.lng - latLngObj.lng();
+		var moveLatLngObj = {};
+		moveLatLngObj.lat = latLngObj.lat();
+		moveLatLngObj.lng = latLngObj.lng();
+		setInterval(function(){
+			moveLatLngObj.lat += disLat/60;
+			moveLatLngObj.lng += disLng/60;
+			if(moveLatLngObj.lat > newLatLngObj.lat)moveLatLngObj.lat = newLatLngObj.lat;
+			if(moveLatLngObj.lng > newLatLngObj.lng)moveLatLngObj.lng = newLatLngObj.lng;
+			busMarker.setPosition(moveLatLngObj);
+			console.log(busMarker.IMEI,newLatLngObj.lat,newLatLngObj.lng);
+		},(1000/10));
+	}
+	function moveBusMarker(newBusData){
+		for(var i = 0 ; i < busMarkers.length ; i++){
+			for(var j = 0 ; j < newBusData.length ; j++){
+				if(busMarkers[i].IMEI === newBusData[j].IMEI){
+					var latLngStr = newBusData[j].LatLng;
+					var latLng = latLngStr.split(",");
+					var latLngObj = {lat:parseStringToInt(latLng[0]),lng:parseStringToInt(latLng[1])};
+					//busMarkers[i].setPosition(latLngObj);
+					console.log(busMarkers[i].getPosition());
+					moveAnimation(busMarkers[i],latLngObj)
+				}
+			}
+		}
+	}
+
 	function loadData(callback) {
 		Parse.Cloud.run('getBusNow').then(function(data) {
 			// Data loading success!!!
@@ -595,8 +639,6 @@ $(document).ready(function() {
 		});
 	}
 
-	var busMarker = [];
-
 	loadData(function(data) {
 		if (data === null) {
 			// Data loading fail
@@ -605,18 +647,22 @@ $(document).ready(function() {
 		}
 		else {
 			createMarker(data)
+			console.log(busMarkers);
 		}
 	});
 
-	setInterval(function(){
-		loadData(function(data){
+
+	setInterval(function(){loadData(function(data){
+			console.log("moving Bus");
 			if(data === null){
 				console.log("Loading Failed");
 			}
 			else{
-				//moveMarker(data);
+				console.log(busMarkers[0]);
+				moveBusMarker(data);
+				//console.log(busMarkers[0],busMarker[1]);
 			}
-		});
-	},10*1000);
+	})}
+	,10*1000);
 
 });
