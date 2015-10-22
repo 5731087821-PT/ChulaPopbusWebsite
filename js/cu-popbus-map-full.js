@@ -560,6 +560,7 @@ $(document).ready(function() {
 	});
 	//==================================== Nai MarkerPart =====================================
 	var busMarkers = [];
+	var intervals = [];
 
 	function parseStringToInt(string){
 		var numStr = '';
@@ -605,16 +606,21 @@ $(document).ready(function() {
 		var moveLatLngObj = {};
 		moveLatLngObj.lat = latLngObj.lat();
 		moveLatLngObj.lng = latLngObj.lng();
-		setInterval(function(){
-			moveLatLngObj.lat += disLat/60;
-			moveLatLngObj.lng += disLng/60;
-			if(moveLatLngObj.lat > newLatLngObj.lat)moveLatLngObj.lat = newLatLngObj.lat;
-			if(moveLatLngObj.lng > newLatLngObj.lng)moveLatLngObj.lng = newLatLngObj.lng;
+		intervals.push(setInterval(function(){
+			moveLatLngObj.lat += disLat/20;
+			moveLatLngObj.lng += disLng/20;
+			if(disLat*moveLatLngObj.lat > disLat*newLatLngObj.lat)moveLatLngObj.lat = newLatLngObj.lat;
+			if(disLng*moveLatLngObj.lng > disLng*newLatLngObj.lng)moveLatLngObj.lng = newLatLngObj.lng;
+
 			busMarker.setPosition(moveLatLngObj);
-			console.log(busMarker.IMEI,newLatLngObj.lat,newLatLngObj.lng);
-		},(1000/10));
+
+			console.log(busMarker.IMEI,moveLatLngObj.lat,newLatLngObj.lat,moveLatLngObj.lng,newLatLngObj.lng);
+		},1000/2));
 	}
 	function moveBusMarker(newBusData){
+		for(var k = 0 ; k < intervals.length ; k++){
+			clearInterval(intervals[k]);
+		}
 		for(var i = 0 ; i < busMarkers.length ; i++){
 			for(var j = 0 ; j < newBusData.length ; j++){
 				if(busMarkers[i].IMEI === newBusData[j].IMEI){
