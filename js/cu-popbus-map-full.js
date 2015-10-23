@@ -535,12 +535,12 @@ $(document).ready(function() {
 			$(this).data("selected", "1");
 			active_route[parseInt(c[0])-1] = 1;
 			TweenMax.to($(this), 0.1, {color: "rgba(255,255,255,1.00)", background: a, ease:Quad.easeOut});
-			if(c[0] == 1) 		addPath(1);
-			else if(c[0] == 2) 	addPath(2);
-			else if(c[0] == 3) 	addPath(3);
-			else if(c[0] == 4) 	addPath(4);
-			else if(c[0] == 5) 	addPath(5);
-			else if(c[0] == 6) 	addPath(6);
+			if(c[0] == 1) 		{addPath(1);toggleBusMarker(1);}
+			else if(c[0] == 2) 	{addPath(2);toggleBusMarker(2);}
+			else if(c[0] == 3) 	{addPath(3);toggleBusMarker(3);}
+			else if(c[0] == 4) 	{addPath(4);toggleBusMarker(4);}
+			else if(c[0] == 5) 	{addPath(5);toggleBusMarker(5);}
+			else if(c[0] == 6) 	{addPath(6);toggleBusMarker(6);}
 			updateMarkAdd(c[0]);
 		}
 		else if(b == 1) {
@@ -548,12 +548,12 @@ $(document).ready(function() {
 			$(this).data("selected", "0");
 			active_route[parseInt(c[0])-1] = 0;
 			TweenMax.to($(this), 0.1, {color: a, background: "transparent", ease:Quad.easeOut});
-			if(c[0] == 1) 		removePath(1);
-			else if(c[0] == 2) 	removePath(2);
-			else if(c[0] == 3) 	removePath(3);
-			else if(c[0] == 4) 	removePath(4);
-			else if(c[0] == 5) 	removePath(5);
-			else if(c[0] == 6) 	removePath(6);
+			if(c[0] == 1) {removePath(1);toggleBusMarker(1);}
+			else if(c[0] == 2) 	{removePath(2);toggleBusMarker(2);}
+			else if(c[0] == 3) 	{removePath(3);toggleBusMarker(3);}
+			else if(c[0] == 4) 	{removePath(4);toggleBusMarker(4);}
+			else if(c[0] == 5) 	{removePath(5);toggleBusMarker(5);}
+			else if(c[0] == 6) 	{removePath(6);toggleBusMarker(6);}
 			updateMarkRemove(c[0]);
 		}
 
@@ -582,9 +582,14 @@ $(document).ready(function() {
 			console.log(latLngObj);
 			//if(latLngObj.lat === 0 && latLngObj.lng === 0)continue;
 			busMarkers.push(addBusMarker(i,latLngObj));
+
 			busMarkers[i].IMEI = json[i].IMEI;
 			busMarkers[i].lineNo = json[i].LineNo;
 			busMarkers[i].num = i;
+
+			var image = "C:/xampp/htdocs/img/bus_icons_0"+busMarkers[i].lineNo;
+
+			//busMarkers[i].setIcon(image);
 
 			console.log(json[i].IMEI);
 			//console.log(addBusMarker("BusNo"+i,latLngObj));
@@ -634,6 +639,13 @@ $(document).ready(function() {
 			}
 		}
 	}
+	function toggleBusMarker(lineNo){
+		for(var i = 0 ; i < busMarkers.length ; i++){
+			if(busMarkers[i].lineNo === lineNo){
+				busMarkers[i].setVisible(!busMarkers[i].getVisible());
+			}
+		}
+	}
 
 	function loadData(callback) {
 		Parse.Cloud.run('getBusNow').then(function(data) {
@@ -654,6 +666,7 @@ $(document).ready(function() {
 		else {
 			createMarker(data)
 			console.log(busMarkers);
+			toggleBusMarker(0);
 		}
 	});
 
