@@ -579,7 +579,7 @@ $(document).ready(function() {
 			var split = str.split(",");
 			var latLngObj = {lat:parseStringToInt(split[0]),lng:parseStringToInt(split[1])};
 
-			console.log(latLngObj);
+			//console.log(latLngObj);
 			//if(latLngObj.lat === 0 && latLngObj.lng === 0)continue;
 			busMarkers.push(addBusMarker(i,latLngObj));
 
@@ -587,11 +587,19 @@ $(document).ready(function() {
 			busMarkers[i].lineNo = json[i].LineNo;
 			busMarkers[i].num = i;
 
-			var image = "C:/xampp/htdocs/img/bus_icons_0"+busMarkers[i].lineNo;
 
-			//busMarkers[i].setIcon(image);
-
-			console.log(json[i].IMEI);
+			if(busMarkers[i].lineNo != null){
+			var url = "./images/cu-popbus-map-full/bus_icons_0" + busMarkers[i].lineNo + ".png";
+			var image = new google.maps.MarkerImage(
+		    url,
+		    null, /* size is determined at runtime */
+		    null, /* origin is 0,0 */
+		    new google.maps.Point(25,25), /* anchor is bottom center of the scaled image */
+		    new google.maps.Size(50,50)
+			);
+			busMarkers[i].setIcon(image);
+			}
+			//console.log(json[i].IMEI);
 			//console.log(addBusMarker("BusNo"+i,latLngObj));
 		}
 	}
@@ -603,6 +611,7 @@ $(document).ready(function() {
 			title: ''+num,
 		});
 	}
+
 	function moveAnimation(busMarker,newLatLngObj){
 		var latLngObj = busMarker.getPosition();
 		if(typeof(latLngObj) === 'undefined')return;
@@ -622,6 +631,7 @@ $(document).ready(function() {
 			console.log(busMarker.IMEI,moveLatLngObj.lat,newLatLngObj.lat,moveLatLngObj.lng,newLatLngObj.lng);
 		},1000/2));
 	}
+
 	function moveBusMarker(newBusData){
 		for(var k = 0 ; k < intervals.length ; k++){
 			clearInterval(intervals[k]);
@@ -633,12 +643,13 @@ $(document).ready(function() {
 					var latLng = latLngStr.split(",");
 					var latLngObj = {lat:parseStringToInt(latLng[0]),lng:parseStringToInt(latLng[1])};
 					//busMarkers[i].setPosition(latLngObj);
-					console.log(busMarkers[i].getPosition());
+					//console.log(busMarkers[i].getPosition());
 					moveAnimation(busMarkers[i],latLngObj)
 				}
 			}
 		}
 	}
+
 	function toggleBusMarker(lineNo){
 		for(var i = 0 ; i < busMarkers.length ; i++){
 			if(busMarkers[i].lineNo === lineNo){
@@ -665,7 +676,7 @@ $(document).ready(function() {
 		}
 		else {
 			createMarker(data)
-			console.log(busMarkers);
+			//console.log(busMarkers);
 			toggleBusMarker(0);
 		}
 	});
