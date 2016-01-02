@@ -1,0 +1,12 @@
+{
+    "preset": "node-style-guide",
+    "validateIndentation": {
+	    "value": "\t"
+    },
+    "requireTrailingComma": false,
+    "disallowTrailingComma": true,
+    "maximumLineLength": {
+    	"value": 100,
+    	"tabSize": 4
+    }
+}

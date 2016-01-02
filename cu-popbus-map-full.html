@@ -2,54 +2,73 @@
 <!doctype html>
 <html>
 <head>
-<meta charset="utf-8">
-<title>CU POP BUS | Travel Around Chulalongkorn University</title>
-<link rel="shortcut icon" href="favicon.png" />
-<link rel="stylesheet" type="text/css" href="css/cu-popbus-map-full.css">
-<link rel="stylesheet" type="text/css" href="css/common.css">
+    <meta charset="utf-8">
+    <title>CU POP BUS | Travel Around Chulalongkorn University</title>
+    <link rel="shortcut icon" href="favicon.png" />
+    
+    <link rel="stylesheet" type="text/css" href="css/cu-popbus-map-full.css">
+    <link rel="stylesheet" type="text/css" href="css/common.css">
 
-<script src="js/jquery-2.1.1.min.js"></script>
-<script src="js/greensock-v12-js/minified/TimelineMax.min.js"></script>
-<script src="js/greensock-v12-js/minified/TweenMax.min.js"></script>
-<script src="js/greensock-v12-js/minified/easing/EasePack.min.js"></script>
-<script src="//www.parsecdn.com/js/parse-1.6.7.min.js"></script>
-<script src="js/modernizr.custom.59394.js"></script>
-<script src="js/jquery-waypoints-master/waypoints.min.js"></script>
-<script src="js/pace.min.js"></script>
-<script src="js/cu-popbus-map-full.js"></script>
-<script src="js/common.js"></script>
+    <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-<!--GOOGLE-MAP-API-->
-<script src="https://maps.googleapis.com/maps/api/js"></script>
+          ga('create', 'UA-42353426-4', 'auto');
+          ga('send', 'pageview');
+    </script>
+
+    <style>
+        .error-message {
+            color: #000;
+            background: #FFF;
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            z-index: 100000;
+            letter-spacing: 0;
+            padding: 10px 20px;
+            border: 1px solid #ccc;
+        }
+    </style>
 </head>
 
 <body class="menu-1">
+    <div id="error_msg" class="error-message"></div>
     <div class="map-wrap unselectable">
         <div class="route">
-        	<a href="index.html" target="_self"><div class="pointer logo-mover"></div>
-        	<div class="pointer logo"></div></a>
+            <a href="index.html" target="_self"><div class="pointer logo-mover"></div>
+            <div class="pointer logo"></div></a>
 
-            <div class="rt pointer rt-1" style="border: 2px solid rgba(224,75,63,1.00); color: rgba(255,255,255,1.00); background: rgba(224,75,63,1.00);" data-color="rgba(224,75,63,1.00)" data-selected="1"><b>1</b></div>
+            <span id="bus_line_visible_btn_group"></span>
+
+            <!-- <div class="rt pointer rt-1" style="border: 2px solid rgba(224,75,63,1.00); color: rgba(255,255,255,1.00); background: rgba(224,75,63,1.00);" data-color="rgba(224,75,63,1.00)" data-selected="1"><b>1</b></div>
             <div class="rt pointer rt-2" style="border: 2px solid rgba(51,119,219,1.00); color: rgba(255,255,255,1.00); background: rgba(51,119,219,1.00);" data-color="rgba(51,119,219,1.00)" data-selected="1"><b>2</b></div>
             <div class="rt pointer rt-3" style="border: 2px solid rgba(94,178,66,1.00); color: rgba(255,255,255,1.00); background: rgba(94,178,66,1.00);" data-color="rgba(94,178,66,1.00)" data-selected="1"><b>3</b></div>
             <div class="rt pointer rt-4" style="border: 2px solid rgba(219,197,15,1.00); color: rgba(255,255,255,1.00); background: rgba(219,197,15,1.00);" data-color="rgba(219,197,15,1.00)" data-selected="1"><b>4</b></div>
             <div class="rt pointer rt-5" style="border: 2px solid rgba(168,30,202,1.00); color: rgba(255,255,255,1.00); background: rgba(168,30,202,1.00);" data-color="rgba(168,30,202,1.00)" data-selected="1"><b>5</b></div>
-            <div class="rt pointer rt-6" style="border: 2px solid rgba(226,90,194,1.00); color: rgba(255,255,255,1.00); background: rgba(226,90,194,1.00);" data-color="rgba(226,90,194,1.00)" data-selected="1"><b>5A</b></div>
+            <div class="rt pointer rt-6" style="border: 2px solid rgba(226,90,194,1.00); color: rgba(255,255,255,1.00); background: rgba(226,90,194,1.00);" data-color="rgba(226,90,194,1.00)" data-selected="1"><b>5A</b></div> -->
         	<div class="border"></div>
 
-            <a href="index.html" target="_self"><div class="pointer back"></div></a>
+            <!-- <a href="index.html" target="_self"><div class="pointer back"></div></a> -->
         </div>
         <div class="map" id="map-canvas"></div>
     </div>
-    <script>
-		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-		  ga('create', 'UA-42353426-4', 'auto');
-		  ga('send', 'pageview');
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script src="js/greensock-v12-js/minified/TimelineMax.min.js"></script>
+    <script src="js/greensock-v12-js/minified/TweenMax.min.js"></script>
+    <script src="js/greensock-v12-js/minified/easing/EasePack.min.js"></script>
+    <script src="//www.parsecdn.com/js/parse-1.6.12.min.js"></script>
+    <!-- <script src="js/modernizr.custom.59394.js"></script> -->
+    <!-- <script src="js/jquery-waypoints-master/waypoints.min.js"></script> -->
+    <script src="js/pace.min.js"></script>
+    <script src="js/cu-popbus-map-full-v2.js"></script>
+    <!-- <script src="js/common.js"></script> -->
 
+    <!--GOOGLE-MAP-API-->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxzFvGLcAhBaWn4OfepJzb6XFzjWqWmp4&v=3">
     </script>
 </body>
 </html>
