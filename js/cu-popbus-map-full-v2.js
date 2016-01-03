@@ -1,3 +1,12 @@
+/*
+
+  To minify this file, use the UglifyJS2 with following command:
+
+  uglifyjs cu-popbus-map-full-v2.js --compress keep_fargs=false;unsafe --mangle
+    --lint --output cu-popbus-map-full-v2.min.js
+
+*/
+
 /**
   * Process are as follows:
   * 1) Initialize things
@@ -54,40 +63,47 @@ var PopbusTracker = function() {
 			isPrototypeImageLoaded = true;
 		}
 
+		var iconCacher = {};
+
 		BusMarkerIconManagerObj.getColorizedIcon = function(color) {
 			if (!isPrototypeImageLoaded) {
+				// This should not be happen
 				return null;
 			}
 
-			var rColor = parseInt(color.substr(0, 2), 16);
-			var gColor = parseInt(color.substr(2, 2), 16);
-			var bColor = parseInt(color.substr(4, 2), 16);
+			if (!iconCacher.hasOwnProperty(color)) {
 
-			var canvas = document.createElement('canvas');
-			var context = canvas.getContext('2d');
-			var imageWidth = prototypeImage.width;
-			var imageHeight = prototypeImage.height;
-			canvas.width  = imageWidth;
-			canvas.height = imageHeight;
+				var rColor = parseInt(color.substr(0, 2), 16);
+				var gColor = parseInt(color.substr(2, 2), 16);
+				var bColor = parseInt(color.substr(4, 2), 16);
 
-			context.drawImage(prototypeImage, 0, 0);
+				var canvas = document.createElement('canvas');
+				var context = canvas.getContext('2d');
+				var imageWidth = prototypeImage.width;
+				var imageHeight = prototypeImage.height;
+				canvas.width  = imageWidth;
+				canvas.height = imageHeight;
 
-			var imgData = context.getImageData(0, 0, imageWidth, imageHeight);
-			var data = imgData.data;
-			for (var i = 0, n = data.length; i < n; i += 4) {
-				var ratio = data[i] / 255.0;
-				data[i + 0] = Math.round(ratio * 255 + (1 - ratio) * rColor);
-				data[i + 1] = Math.round(ratio * 255 + (1 - ratio) * gColor);
-				data[i + 2] = Math.round(ratio * 255 + (1 - ratio) * bColor);
+				context.drawImage(prototypeImage, 0, 0);
+
+				var imgData = context.getImageData(0, 0, imageWidth, imageHeight);
+				var data = imgData.data;
+				for (var i = 0, n = data.length; i < n; i += 4) {
+					var ratio = data[i] / 255.0;
+					data[i + 0] = Math.round(ratio * 255 + (1 - ratio) * rColor);
+					data[i + 1] = Math.round(ratio * 255 + (1 - ratio) * gColor);
+					data[i + 2] = Math.round(ratio * 255 + (1 - ratio) * bColor);
+				}
+				context.putImageData(imgData, 0, 0);
+
+				iconCacher[color] = {
+					url: canvas.toDataURL(),
+					anchor: new google.maps.Point(20, 20),
+					scaledSize: new google.maps.Size(40, 40)
+				};
 			}
-			context.putImageData(imgData, 0, 0);
 
-			return {
-				url: canvas.toDataURL(),
-				anchor: new google.maps.Point(20, 20),
-				scaledSize: new google.maps.Size(40, 40),
-				clickable: false
-			};
+			return iconCacher[color];
 		};
 
 		BusMarkerIconManagerObj.initialize = function() {
@@ -139,9 +155,9 @@ var PopbusTracker = function() {
 		var marker = new google.maps.Marker({
 			position: busNow.getLocation(),
 			map: mapObj,
-			// Might be null. Please firstly check for prototype icon loading
 			icon: BusMarkerIconManager.getColorizedIcon(color),
-			visible: visible
+			visible: visible,
+			clickable: false
 		});
 
 		this.setBusOldLevel = function(value) {
@@ -420,91 +436,6 @@ var PopbusTracker = function() {
 		return BusNowDataManagerObj;
 	}();
 
-	var BusNowTestCase = function() {
-		var obj = {};
-
-		var testCase = [];
-
-		testCase[0] = [
-			{
-				IMEI: '11111111111111',
-				Name: 'CU Test Bus #1',
-				LineNo: 1,
-				GPSDateTime: '2016-01-03 02:58:45',
-				LatLng: '(13.73751,100.53180)',
-				Direction: '0',
-				Speed: '0',
-				In: 0
-			},
-			{
-				IMEI: '22222222222222',
-				Name: 'CU Test Bus #2',
-				LineNo: 2,
-				GPSDateTime: '2016-01-03 02:58:45',
-				LatLng: '(13.73927,100.53221)',
-				Direction: '0',
-				Speed: '0',
-				In: 0
-			}
-		];
-
-		testCase[1] = [
-			{
-				IMEI: '11111111111111',
-				Name: 'CU Test Bus #1',
-				LineNo: 1,
-				GPSDateTime: '2016-01-03 02:58:45',
-				LatLng: '(13.73724,100.53385)',
-				Direction: '0',
-				Speed: '0',
-				In: 0
-			},
-			{
-				IMEI: '22222222222222',
-				Name: 'CU Test Bus #2',
-				LineNo: 2,
-				GPSDateTime: '2016-01-03 02:58:45',
-				LatLng: '(13.73927,100.53221)',
-				Direction: '0',
-				Speed: '0',
-				In: 0
-			}
-		];
-
-		testCase[2] = [
-			{
-				IMEI: '11111111111111',
-				Name: 'CU Test Bus #1',
-				LineNo: 2,
-				GPSDateTime: '2016-01-03 02:58:45',
-				LatLng: '(13.73724,100.53385)',
-				Direction: '0',
-				Speed: '0',
-				In: 0
-			},
-			{
-				IMEI: '22222222222222',
-				Name: 'CU Test Bus #2',
-				LineNo: 2,
-				GPSDateTime: '2016-01-03 02:58:45',
-				LatLng: '(13.73927,100.53221)',
-				Direction: '0',
-				Speed: '0',
-				In: 0
-			}
-		];
-
-		var counter = 0;
-
-		obj.getNextTestCase = function() {
-			var ans = testCase[counter];
-			counter = (counter + 1) % testCase.length;
-			return ans;
-		};
-
-		return obj;
-	}();
-
 	var BusFetchCycler = function() {
 		var BusFetchCyclerObj = {};
 
@@ -540,12 +471,6 @@ var PopbusTracker = function() {
 				showErrorMessage('Server Anomaly', error);
 				scheduleNextCycle();
 			});
-			/*
-			var jsonData = BusNowTestCase.getNextTestCase();
-			handleFetchedData(jsonData);
-
-			scheduleNextCycle();
-			*/
 		}
 
 		BusFetchCyclerObj.startFetchCycle = function() {
@@ -898,7 +823,7 @@ var PopbusTracker = function() {
 					linkLineAndStation();
 
 					console.log('Data loading complete.');
-					showMessage('');
+					showMessage('Loading Data...');
 
 					if (options.lineButtonsDOM !== undefined &&
 						options.lineButtonsDOM !== null) {
@@ -907,7 +832,7 @@ var PopbusTracker = function() {
 
 					return BusMarkerIconManager.waitForImageLoad();
 				}, function(error) {
-					showErrorMessage('Loading data fail.', error);
+					showErrorMessage('Loading Data Fail.', error);
 				}).then(function(msg) {
 					console.log(msg);
 					BusFetchCycler.startFetchCycle();
