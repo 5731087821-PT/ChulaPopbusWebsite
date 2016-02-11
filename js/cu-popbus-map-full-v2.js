@@ -33,9 +33,9 @@ var PopbusTracker = function() {
 	function showMessage(msg) {
 		if (messageTargetDOM !== null) {
 			if (msg !== '') {
-				$(messageTargetDOM).html(msg).show();
+				$(messageTargetDOM).html(msg).fadeIn(200);
 			} else {
-				$(messageTargetDOM).hide();
+				$(messageTargetDOM).fadeOut(400);
 			}
 		}
 	}
@@ -604,7 +604,7 @@ var PopbusTracker = function() {
 				}
 
 				infoWindowContentCache =
-					'<div class="info_content">' +
+					'<div class="info-content">' +
 						'<div>' + nameEn + '</div>' +
 						'<div style="padding-top: 5px;">' + lineIconHtml + '</div>' +
 					'</div>';
@@ -735,7 +735,12 @@ var PopbusTracker = function() {
 		var allLineList = PopbusData.getBusLineList();
 		$(targetDOM).empty();
 		for (var i = 0; i < allLineList.length; i++) {
-			$(targetDOM).append(allLineList[i].getVisibleButtonObj());
+			$(targetDOM).append(
+				allLineList[i].getVisibleButtonObj()
+					.css('opacity', 0)
+					.delay(i * 100)
+					.animate({ 'opacity': 1}, 400)
+			);
 		}
 	}
 
@@ -823,7 +828,6 @@ var PopbusTracker = function() {
 					linkLineAndStation();
 
 					console.log('Data loading complete.');
-					showMessage('Loading Data...');
 
 					if (options.lineButtonsDOM !== undefined &&
 						options.lineButtonsDOM !== null) {
@@ -835,6 +839,7 @@ var PopbusTracker = function() {
 					showErrorMessage('Loading Data Fail.', error);
 				}).then(function(msg) {
 					console.log(msg);
+					showMessage('Fetching Popbus Positions...');
 					BusFetchCycler.startFetchCycle();
 				});
 		};
@@ -842,10 +847,10 @@ var PopbusTracker = function() {
 		return PopbusDataObj;
 	}();
 
-	function initializeGoogleMapUI(mapObj) {
+	function initializeGoogleMapUI(mapObj, zoomLevel) {
 		return new google.maps.Map(mapObj, {
-			center: { lat: 13.739036, lng: 100.529875 },
-			zoom: 16,
+			center: { lat: 13.740636, lng: 100.529875 },
+			zoom: zoomLevel || 16,
 			disableDefaultUI: true
 		});
 	}
@@ -858,7 +863,7 @@ var PopbusTracker = function() {
 			'OS97kGW9YxCRuZYxb5uPeCbSmBAToHTOEY7JZn18',
 			'JNYrGMF92XJxleOQrKGx2UAc1feIAmKKYS4pYDDv'
 		);
-		var mainMapObj = initializeGoogleMapUI(options.mapDOM);
+		var mainMapObj = initializeGoogleMapUI(options.mapDOM, options.zoomLevel);
 		BusMarkerIconManager.initialize();
 		BusNowDataManager.linkMap(mainMapObj);
 		InfoWindowManager.linkMap(mainMapObj);
@@ -868,11 +873,3 @@ var PopbusTracker = function() {
 
 	return PopbusTrackerObj;
 }();
-
-$(document).ready(function() {
-	PopbusTracker.create({
-		mapDOM: $('#map-canvas')[0],
-		lineButtonsDOM: $('#bus_line_visible_btn_group')[0],
-		messageDOM: $('#error_msg')[0]
-	});
-});

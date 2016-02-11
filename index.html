@@ -2,30 +2,28 @@
 <!doctype html>
 <html>
 <head>
-<meta charset="utf-8">
-<title>CU POP BUS | Travel Around Chulalongkorn University</title>
-<link rel="shortcut icon" href="favicon.png" />
-<link rel="stylesheet" type="text/css" href="css/index.css">
-<link rel="stylesheet" type="text/css" href="css/common.css">
+    <meta charset="utf-8">
+    <title>CU POP BUS | Travel Around Chulalongkorn University</title>
+    <link rel="shortcut icon" href="favicon.png" />
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" type="text/css" href="css/cu-popbus-map-full.css">
+    <link rel="stylesheet" type="text/css" href="css/common.css">
 
-<script src="js/jquery-2.1.1.min.js"></script>
-<script src="js/greensock-v12-js/minified/TimelineMax.min.js"></script>
-<script src="js/greensock-v12-js/minified/TweenMax.min.js"></script>
-<script src="js/greensock-v12-js/minified/easing/EasePack.min.js"></script>
-<script src="js/modernizr.custom.59394.js"></script>
-<script src="js/jquery-waypoints-master/waypoints.min.js"></script>
-<script src="js/pace.min.js"></script>
-<script src="js/index.js"></script>
-<script src="js/common.js"></script>
-<script src="js/cu-popbus-api.js"></script>
-
-<!--GOOGLE-MAP-API-->
-<script src="https://maps.googleapis.com/maps/api/js"></script>
+    <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+         
+          ga('create', 'UA-42353426-4', 'auto');
+          ga('send', 'pageview');
+         
+    </script>
 </head>
 
 <body class="menu-1">
 	<!--MENU-BAR-ON-TOP-->
-	<div class="menu-bar">
+	<div class="menu-bar fullscreen-hide">
     	<div class="container-menu-bar">
         	<div class="pointer logo-mover"></div>
         	<div class="pointer logo link-anchor" data-anchor=".header" data-offset="0"></div>
@@ -56,7 +54,7 @@
     </div>
     
     <!--MENU-BAR-FIXED-->
-    <div class="menu-bar menu-bar-fixed">
+    <div class="menu-bar menu-bar-fixed fullscreen-hide">
     	<div class="container-menu-bar">
         	<div class="pointer logo-mover"></div>
         	<div class="pointer logo link-anchor" data-anchor=".header" data-offset="0"></div>
@@ -86,8 +84,8 @@
         <div class="darken-bg" style="background: rgba(0,0,0,0.75)"></div>
     </div>
     
-    <div class="wrapper">
-        <header class="header">
+    <div class="wrapper ">
+        <header class="header fullscreen-hide">
             <div class="container-header">
                 <ul id="scene-1" class="scene-1 preventpointer" style="z-index: 4;">
                     <li class="layer" id="layer-1" data-depth="0.30"><div class="leaf leaf-1"></div></li>
@@ -99,7 +97,7 @@
                   <div class="text-1 nowrap" style="letter-spacing: -3.2px;"><b>CU POP BUS</b></div>
                     <div class="text-2 nowrap">MORE THAN A VEHICLE</div>
                     <div class="line" style="position: absolute; width: 257px; height: 2px; top: 85px; background: rgba(255,255,255,0.80);"></div>
-                    <div class="text-3">The most convenient way to get around Chulalongkorn University. It’s free, very convenient and<br>eco-friendly!</div>
+                    <div class="text-3">The most convenient way to get around Chulalongkorn University. It’s free, very convenient, and<br>eco-friendly!</div>
                     <div class="circle" style="position: absolute; width: 8px; height: 8px; top: 183px; left: 50%; margin-left: -4px; -webkit-border-radius: 100%; -moz-border-radius: 100%; border-radius: 100%; background: rgba(255,255,255,0.80);"></div>
                     <div class="button pointer nowrap link-anchor" data-anchor=".sc-1" data-offset="50"><b>LEARN MORE ABOUT BUS</b></div>
                 </div>
@@ -112,7 +110,7 @@
             <div class="bg"></div>
         </header>
         
-        <section class="sc-1">
+        <section class="sc-1 fullscreen-hide">
             <div class="container-sc-1">
                 <div class="go-to-sc pointer go-to-sc-2 link-anchor" data-anchor=".sc-2" data-offset="100">
                     <div class="icon-topic" style="background: url(images/icon.png) 0 0 no-repeat;"></div>
@@ -129,7 +127,7 @@
           </div>
         </section>
         
-        <section class="sc-2">
+        <section class="sc-2 fullscreen-hide">
             <div class="container-sc-2">
                 <div class="illus-sec-2-1"></div>
                 <div class="illus-sec-2-2" data-fromtop="646"></div>
@@ -138,38 +136,47 @@
                     <div class="text-up nowrap">What? Where? Free? For? </div>
                     <div class="text-down nowrap"><b>WHAT IS CU POP BUS?</b></div>
                 </div>
-                <div class="desc"><b>Pop Bus</b> is a free shuttle bus service provided by Chulalongkorn University with six routes for its students, professors and staff. The shuttle bus service operates on four routes, running from Mondays to Saturdays, 7AM – 7PM, with bus no. 1 and 2 exclusively on Saturdays.</div>
+                <div class="desc"><b>Pop Bus</b> is a free shuttle bus service provided by Chulalongkorn University with six routes for its students, professors, and staff. The shuttle bus service operates on four routes, running from Mondays to Saturdays, 7AM – 7PM, with bus no. 1 and 2 exclusively on Saturdays.</div>
             </div>
             <div class="divide-bg"></div>
         </section>
         
         <section class="sc-3">
             <div class="container-sc-3">
-                <div class="topic">
+                <div class="topic fullscreen-hide">
                     <div class="icon"></div>
                     <div class="text-up nowrap">Destination is important</div>
                     <div class="text-down nowrap"><b>ROUTE</b></div>
                 </div>
-                <div class="map-wrap unselectable">
-                    <div class="route">
-                        <a href="cu-popbus-map-full.html" target="_blank"><div class="maximize pointer"></div></a>
-                        
-                        <div class="rt pointer rt-1" style="border: 2px solid rgba(224,75,63,1.00); color: rgba(255,255,255,1.00); background: rgba(224,75,63,1.00);" data-color="rgba(224,75,63,1.00)" data-selected="1"><b>1</b></div>
-                        <div class="rt pointer rt-2" style="border: 2px solid rgba(51,119,219,1.00); color: rgba(255,255,255,1.00); background: rgba(51,119,219,1.00);" data-color="rgba(51,119,219,1.00)" data-selected="1"><b>2</b></div>
-                        <div class="rt pointer rt-3" style="border: 2px solid rgba(94,178,66,1.00); color: rgba(255,255,255,1.00); background: rgba(94,178,66,1.00);" data-color="rgba(94,178,66,1.00)" data-selected="1"><b>3</b></div>
-                        <div class="rt pointer rt-4" style="border: 2px solid rgba(219,197,15,1.00); color: rgba(255,255,255,1.00); background: rgba(219,197,15,1.00);" data-color="rgba(219,197,15,1.00)" data-selected="1"><b>4</b></div>
-                        <div class="rt pointer rt-5" style="border: 2px solid rgba(168,30,202,1.00); color: rgba(255,255,255,1.00); background: rgba(168,30,202,1.00);" data-color="rgba(168,30,202,1.00)" data-selected="1"><b>5</b></div>
-                        <div class="rt pointer rt-6" style="border: 2px solid rgba(226,90,194,1.00); color: rgba(255,255,255,1.00); background: rgba(226,90,194,1.00);" data-color="rgba(226,90,194,1.00)" data-selected="1"><b>5A</b></div>
+                <div class="map-wrap map-wrap-small unselectable">
+                    <div class="fullscreen-wrap">
+                        <div id="error_msg" class="tracker-error-message">Initializing...</div>
+                        <div class="route">
+                            <a href="index.html" title="CU Popbus App" target="_self">
+                                <div class="pointer logo-mover"></div>
+                                <div class="pointer logo"></div>
+                            </a>
+
+                            <span id="bus_line_visible_btn_group"></span>
+ 
+                            <div class="dway">
+                                <a href="http://www.dwaythailand.com/">
+                                    <img src="./images/cu-popbus-map-full/dway_logo.png" title="DWay GPS Positioning System">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="map" id="map-canvas"></div>
+                        <div id="map_fullscreen_btn" class="maximize pointer">
+                        </div>
                     </div>
-                    <div class="map" id="map-canvas"></div>
                 </div>
             </div>
-            <div class="divide-bg"></div>
+            <div class="divide-bg fullscreen-hide"></div>
         </section>
-        <div class="push"></div>
+        <div class="push fullscreen-hide"></div>
     </div>
     
-    <footer class="footer">
+    <footer class="footer fullscreen-hide">
     	<div class="container-footer">
         	<div class="thinc-logo"></div>
             <div class="text-1"><span style="font-size:16px;"><b>FACULTY OF ENGINEERING, CHULALONGKORN UNIVERSITY</b></span><br><span style="font-size:14px; letter-spacing: -0.8px">PHAYATHAI ROAD, PATUMWAN, BANGKOK, THAILAND 10330</span><br><span style="font-size: 12px; letter-spacing: -0.2px;">COPYRIGHT © 2014 Thinc. ALL RIGHTS RESERVED.</span></div>
@@ -178,20 +185,48 @@
         <div class="darken-bg"></div>
     </footer>
     
-    <!--This Parallax Script must be next to <ul id="scene">-->
-	<script src="js/parallax-master/deploy/jquery.parallax.min.js"></script>
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script src="js/greensock-v12-js/minified/TimelineMax.min.js"></script>
+    <script src="js/greensock-v12-js/minified/TweenMax.min.js"></script>
+    <script src="js/greensock-v12-js/minified/easing/EasePack.min.js"></script>
+    <script src="js/modernizr.custom.59394.js"></script>
+    <script src="js/jquery-waypoints-master/waypoints.min.js"></script>
+    <script src="js/pace.min.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/parallax-master/deploy/jquery.parallax.min.js"></script>
     <script>
-       $("#scene-1").parallax();
+        $("#scene-1").parallax();
+        $(document).ready(function() {
+            PopbusTracker.create({
+                mapDOM: $('#map-canvas')[0],
+                lineButtonsDOM: $('#bus_line_visible_btn_group')[0],
+                messageDOM: $('#error_msg')[0],
+                zoomLevel: 15
+            });
+
+            function toggleFullScreen() {
+                var doc = window.document;
+                var docEl = doc.documentElement;
+
+                var requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
+                var cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
+
+                if(!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
+                    requestFullScreen.call(docEl);
+                }
+                else {
+                    cancelFullScreen.call(doc);
+                }
+            }
+
+            $('#map_fullscreen_btn').click(function() {
+                toggleFullScreen();
+            });
+        });
     </script>
-    <script>
-		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-		 
-		  ga('create', 'UA-42353426-4', 'auto');
-		  ga('send', 'pageview');
-		 
-    </script>
+    <script src="//www.parsecdn.com/js/parse-1.6.12.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxzFvGLcAhBaWn4OfepJzb6XFzjWqWmp4&v=3"></script>
+    <script src="js/cu-popbus-map-full-v2.js"></script>
 </body>
 </html>
