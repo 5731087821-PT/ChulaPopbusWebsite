@@ -56,14 +56,34 @@ var PopbusTracker = function() {
 		prototypeImage.onload = onPrototypeImageLoaded;
 		var isPrototypeImageLoaded = false;
 
-		var prototypeImageLoadPromise = new Parse.Promise();
+		/*var directionImage = new Image();
+		directionImage.onload = onDirectionImageLoaded;
+		var isDirectionImageLoaded = false;*/
 
-		function onPrototypeImageLoaded() {
-			prototypeImageLoadPromise.resolve('Bus marker prototype image loaded');
-			isPrototypeImageLoaded = true;
+		var imagesLoadPromise = new Parse.Promise();
+
+		function checkPromiseResolve() {
+			// if (isDirectionImageLoaded && isPrototypeImageLoaded) {
+			if (isPrototypeImageLoaded) {
+				imagesLoadPromise.resolve('Bus marker images loaded');
+			}
 		}
 
-		var iconCacher = {};
+		/*function onDirectionImageLoaded() {
+			isDirectionImageLoaded = true;
+			checkPromiseResolve();
+
+			for (var i = 0; i < 360; i++) {
+				BusMarkerIconManagerObj.getRotatedDirectionIcon(i);
+			}
+		}*/
+
+		function onPrototypeImageLoaded() {
+			isPrototypeImageLoaded = true;
+			checkPromiseResolve();
+		}
+
+		var prototypeIconCacher = {};
 
 		BusMarkerIconManagerObj.getColorizedIcon = function(color) {
 			if (!isPrototypeImageLoaded) {
@@ -71,7 +91,7 @@ var PopbusTracker = function() {
 				return null;
 			}
 
-			if (!iconCacher.hasOwnProperty(color)) {
+			if (!prototypeIconCacher.hasOwnProperty(color)) {
 
 				var rColor = parseInt(color.substr(0, 2), 16);
 				var gColor = parseInt(color.substr(2, 2), 16);
@@ -96,22 +116,66 @@ var PopbusTracker = function() {
 				}
 				context.putImageData(imgData, 0, 0);
 
-				iconCacher[color] = {
+				prototypeIconCacher[color] = {
 					url: canvas.toDataURL(),
 					anchor: new google.maps.Point(20, 20),
 					scaledSize: new google.maps.Size(40, 40)
 				};
 			}
 
-			return iconCacher[color];
+			return prototypeIconCacher[color];
+		};
+
+		var directionIconCacher = {};
+
+		BusMarkerIconManagerObj.getRotatedDirectionIcon = function(angle) {
+			if (!isDirectionImageLoaded) {
+				// This should not be happen
+				return null;
+			}
+
+			angle = Math.round(angle / 2) * 2;
+
+			if (!directionIconCacher.hasOwnProperty(angle)) {
+
+				/*var canvas = document.createElement('canvas');
+				var context = canvas.getContext('2d');
+				var imageWidth = directionImage.width;
+				var imageHeight = directionImage.height;
+				canvas.width  = imageWidth;
+				canvas.height = imageHeight;
+
+				context.translate(imageWidth / 2, imageHeight / 2);
+				context.rotate(angle * Math.PI / 180.0);
+				context.drawImage(directionImage, -imageWidth / 2, -imageHeight / 2);
+
+				directionIconCacher[angle] = {
+					url: canvas.toDataURL(),
+					anchor: new google.maps.Point(20, 20),
+					scaledSize: new google.maps.Size(40, 40)
+				};*/
+
+				directionIconCacher[angle] = {
+					path: 'M542 1233 c-165 -222 -215 -297 -241 -367 -59 -158 -24 -327 96 -456 162 -175 434 -184 608 -19 133 125 177 307 115 472 -27 72 -92 171 -252 385 -114 151 -133 172 -158 172 -24 0 -44 -22 -168 -187z m313 -223 c70 -34 139 -107 166 -177 106 -273 -161 -540 -434 -434 -69 27 -143 96 -177 166 -21 43 -25 64 -25 145 0 84 3 101 28 147 33 64 83 116 140 144 66 34 86 38 172 36 61 -2 92 -8 130 -27z',
+					anchor: new google.maps.Point(710, 710),
+					scale: 0.028169014,
+					strokeOpacity: 0,
+					fillColor: '#333333',
+					fillOpacity: 1,
+					rotation: angle
+				};
+			}
+
+			return directionIconCacher[angle];
 		};
 
 		BusMarkerIconManagerObj.initialize = function() {
 			prototypeImage.src = './images/cu-popbus-map-full/bus_icons_general.png';
+			// directionImage.src = './images/cu-popbus-map-full/bus_direction.png';
 		};
 
 		BusMarkerIconManagerObj.waitForImageLoad = function() {
-			return prototypeImageLoadPromise;
+			return imagesLoadPromise;
 		};
 
 		return BusMarkerIconManagerObj;
@@ -143,6 +207,7 @@ var PopbusTracker = function() {
 
 		this.setVisible = function(value) {
 			marker.setVisible(value);
+			directionMarker.setVisible(value);
 		};
 
 		var linkedLine = null;
@@ -156,22 +221,39 @@ var PopbusTracker = function() {
 			position: busNow.getLocation(),
 			map: mapObj,
 			icon: BusMarkerIconManager.getColorizedIcon(color),
+			optimized: false,
 			visible: visible,
-			clickable: false
+			clickable: false,
+			zIndex: 20
+		});
+		var curDirection = busNow.getDirectionOrZero();
+		var directionMarker = new google.maps.Marker({
+			position: busNow.getLocation(),
+			map: mapObj,
+			icon: BusMarkerIconManager.getRotatedDirectionIcon(
+				curDirection
+			),
+			optimized: false,
+			visible: visible,
+			clickable: false,
+			zIndex: 10
 		});
 
 		this.setBusOldLevel = function(value) {
 			switch (value) {
 				case BusDataOldLevel.NEW: {
 					marker.setOpacity(1.0);
+					directionMarker.setOpacity(1.0);
 					break;
 				}
 				case BusDataOldLevel.OLD: {
 					marker.setOpacity(0.5);
+					directionMarker.setOpacity(0.5);
 					break;
 				}
 				case BusDataOldLevel.SIGNAL_LOST: {
 					marker.setOpacity(0.02);
+					directionMarker.setOpacity(0.02);
 					break;
 				}
 			}
@@ -180,17 +262,20 @@ var PopbusTracker = function() {
 
 		this.destroy = function() {
 			marker.setMap(null);
+			directionMarker.setMap(null);
 			if (linkedLine !== null) {
 				linkedLine.removeBusNowMarker(this);
 			}
 		};
 
 		var targetPosition = null;
+		var targetDirection = 0;
 		var animationTimeLeft = 0;
 		var lastDateTime = Date.now();
 
-		this.animateTo = function(newPosition) {
+		this.animateTo = function(newPosition, newDirection) {
 			targetPosition = newPosition;
+			targetDirection = newDirection;
 			animationTimeLeft = 1000 * 3;
 			lastDateTime = Date.now();
 		};
@@ -200,14 +285,58 @@ var PopbusTracker = function() {
 				var pastDuration = Date.now() - lastDateTime;
 				if (pastDuration >= animationTimeLeft) {
 					animationTimeLeft = 0;
+
 					marker.setPosition(targetPosition);
+					directionMarker.setPosition(targetPosition);
+
+					if (targetDirection !== curDirection) {
+						directionMarker.setIcon(
+							BusMarkerIconManager.getRotatedDirectionIcon(
+								targetDirection
+							)
+						);
+						curDirection = targetDirection;
+					}
 				} else {
 					var ratio = pastDuration / animationTimeLeft;
+
+					// Interpolating position
 					var curPos = marker.getPosition();
-					marker.setPosition({
+					var newPosition = {
 						lat: ratio * targetPosition.lat + (1 - ratio) * curPos.lat(),
 						lng: ratio * targetPosition.lng + (1 - ratio) * curPos.lng()
-					});
+					};
+					marker.setPosition(newPosition);
+					directionMarker.setPosition(newPosition);
+
+					// Interpolating heading angle
+					var overheading = targetDirection;
+					while (overheading < curDirection) {
+						overheading += 360;
+					}
+					var underheading = targetDirection;
+					while (underheading > curDirection) {
+						underheading -= 360;
+					}
+					var newHeading;
+					if (overheading - curDirection < curDirection - underheading) {
+						newHeading = curDirection + ratio * (overheading - curDirection);
+					} else {
+						newHeading = curDirection - ratio * (curDirection - underheading);
+					}
+					while (newHeading < 0) {
+						newHeading += 360;
+					}
+					while (newHeading > 360) {
+						newHeading -= 360;
+					}
+					if (newHeading !== curDirection) {
+						directionMarker.setIcon(
+							BusMarkerIconManager.getRotatedDirectionIcon(newHeading)
+						);
+						curDirection = newHeading;
+					}
+
 					animationTimeLeft -= pastDuration;
 				}
 				lastDateTime = Date.now();
@@ -242,7 +371,7 @@ var PopbusTracker = function() {
 			};
 
 			// Both are nullable
-			direction = obj.Direction;
+			direction = Number(obj.Direction) || null;
 			speed = obj.Speed;
 		}
 		setBusNowProperties(jsonObj);
@@ -289,10 +418,12 @@ var PopbusTracker = function() {
 				} else {
 					var oldLocation = this.getLocation();
 					var newLocation = newBusNowData.getLocation();
+					var newDirection = newBusNowData.getDirectionOrZero();
 					if (oldLocation.lat !== newLocation.lat ||
-						oldLocation.lng !== newLocation.lng) {
+						oldLocation.lng !== newLocation.lng ||
+						this.getDirectionOrZero() !== newDirection) {
 						// Change location
-						marker.animateTo(newLocation);
+						marker.animateTo(newLocation, newDirection);
 					}
 				}
 			}
@@ -306,6 +437,10 @@ var PopbusTracker = function() {
 
 		this.getLocation = function() {
 			return location;
+		};
+
+		this.getDirectionOrZero = function() {
+			return direction || 0;
 		};
 
 		this.getLineNo = function() {
