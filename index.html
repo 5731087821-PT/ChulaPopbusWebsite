@@ -23,7 +23,7 @@
 
 <body class="menu-1">
 	<!--MENU-BAR-ON-TOP-->
-	<div class="menu-bar fullscreen-hide">
+	<div class="menu-bar">
     	<div class="container-menu-bar">
         	<div class="pointer logo-mover"></div>
         	<div class="pointer logo link-anchor" data-anchor=".header" data-offset="0"></div>
@@ -54,7 +54,7 @@
     </div>
     
     <!--MENU-BAR-FIXED-->
-    <div class="menu-bar menu-bar-fixed fullscreen-hide">
+    <div class="menu-bar menu-bar-fixed">
     	<div class="container-menu-bar">
         	<div class="pointer logo-mover"></div>
         	<div class="pointer logo link-anchor" data-anchor=".header" data-offset="0"></div>
@@ -85,7 +85,7 @@
     </div>
     
     <div class="wrapper ">
-        <header class="header fullscreen-hide">
+        <header class="header">
             <div class="container-header">
                 <ul id="scene-1" class="scene-1 preventpointer" style="z-index: 4;">
                     <li class="layer" id="layer-1" data-depth="0.30"><div class="leaf leaf-1"></div></li>
@@ -110,7 +110,7 @@
             <div class="bg"></div>
         </header>
         
-        <section class="sc-1 fullscreen-hide">
+        <section class="sc-1">
             <div class="container-sc-1">
                 <div class="go-to-sc pointer go-to-sc-2 link-anchor" data-anchor=".sc-2" data-offset="100">
                     <div class="icon-topic" style="background: url(images/icon.png) 0 0 no-repeat;"></div>
@@ -127,7 +127,7 @@
           </div>
         </section>
         
-        <section class="sc-2 fullscreen-hide">
+        <section class="sc-2">
             <div class="container-sc-2">
                 <div class="illus-sec-2-1"></div>
                 <div class="illus-sec-2-2" data-fromtop="646"></div>
@@ -143,13 +143,13 @@
         
         <section class="sc-3">
             <div class="container-sc-3">
-                <div class="topic fullscreen-hide">
+                <div class="topic">
                     <div class="icon"></div>
                     <div class="text-up nowrap">Destination is important</div>
                     <div class="text-down nowrap"><b>ROUTE</b></div>
                 </div>
                 <div class="map-wrap map-wrap-small unselectable">
-                    <div class="fullscreen-wrap">
+                    <div id="tracker_map_wrapper" class="">
                         <div id="error_msg" class="tracker-error-message">Initializing...</div>
                         <div class="route">
                             <a href="index.html" title="CU Popbus App" target="_self">
@@ -166,17 +166,16 @@
                             </div>
                         </div>
                         <div class="map" id="map-canvas"></div>
-                        <div id="map_fullscreen_btn" class="maximize pointer">
-                        </div>
+                        <button id="map_fullscreen_btn" class="maximize pointer" style="display: none;">
                     </div>
                 </div>
             </div>
-            <div class="divide-bg fullscreen-hide"></div>
+            <div class="divide-bg"></div>
         </section>
-        <div class="push fullscreen-hide"></div>
+        <div class="push"></div>
     </div>
     
-    <footer class="footer fullscreen-hide">
+    <footer class="footer">
     	<div class="container-footer">
         	<div class="thinc-logo"></div>
             <div class="text-1"><span style="font-size:16px;"><b>FACULTY OF ENGINEERING, CHULALONGKORN UNIVERSITY</b></span><br><span style="font-size:14px; letter-spacing: -0.8px">PHAYATHAI ROAD, PATUMWAN, BANGKOK, THAILAND 10330</span><br><span style="font-size: 12px; letter-spacing: -0.2px;">COPYRIGHT © 2014 Thinc. ALL RIGHTS RESERVED.</span></div>
@@ -195,6 +194,7 @@
     <script src="js/index.js"></script>
     <script src="js/common.js"></script>
     <script src="js/parallax-master/deploy/jquery.parallax.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/screenfull.js/3.0.0/screenfull.min.js"></script>
     <script>
         $("#scene-1").parallax();
         $(document).ready(function() {
@@ -205,24 +205,15 @@
                 zoomLevel: 15
             });
 
-            function toggleFullScreen() {
-                var doc = window.document;
-                var docEl = doc.documentElement;
-
-                var requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
-                var cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
-
-                if(!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
-                    requestFullScreen.call(docEl);
-                }
-                else {
-                    cancelFullScreen.call(doc);
-                }
-            }
-
-            $('#map_fullscreen_btn').click(function() {
-                toggleFullScreen();
-            });
+            if (screenfull.enabled) {
+                $('#map_fullscreen_btn').show().click(function() {
+                    if (!screenfull.isFullscreen) {
+                        screenfull.request($('#tracker_map_wrapper')[0]);
+                    } else {
+                        screenfull.exit();
+                    }
+                });
+            };
         });
     </script>
     <script src="//www.parsecdn.com/js/parse-1.6.12.min.js"></script>

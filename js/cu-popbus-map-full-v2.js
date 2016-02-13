@@ -129,10 +129,10 @@ var PopbusTracker = function() {
 		var directionIconCacher = {};
 
 		BusMarkerIconManagerObj.getRotatedDirectionIcon = function(angle) {
-			if (!isDirectionImageLoaded) {
+			/*if (!isDirectionImageLoaded) {
 				// This should not be happen
 				return null;
-			}
+			}*/
 
 			angle = Math.round(angle / 2) * 2;
 
