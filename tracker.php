@@ -1,3 +1,16 @@
+<?php
+if (isset($_GET['location'])) {
+    $locationToken = explode(",", $_GET['location'], 3);
+    if (count($locationToken) === 2 &&
+        is_numeric($locationToken[0]) &&
+        is_numeric($locationToken[1])) {
+        $myLocation = array(
+            floatval($locationToken[0]),
+            floatval($locationToken[1])
+        );
+    }
+}
+?>
 <!--[if lt IE 9]> <script src="js/html5shiv.js"></script> <![endif]-->
 <!doctype html>
 <html>
@@ -43,6 +56,30 @@
             </div>
         </div>
 
+        <?php
+        if (isset($myLocation)) {
+        ?>
+        <div class="map-hint">
+            <div style="padding-bottom: 5px;">
+                <div style="width: 20px; float: left; text-align: center; padding-right: 10px;">
+                    <div class="station-hint-icon"></div>
+                </div>
+                Stations
+            </div>
+            <div>
+                <div style="width: 20px; float: left; text-align: center; padding-right: 10px;">
+                    <img
+                        src="./images/cu-popbus-map-full/my-location.png"
+                        style="height: 15px; width: auto;"
+                        title="My Location Icon">
+                </div>
+                You're here
+            </div>
+        </div>
+        <?php
+        }
+        ?>
+
         <div class="credit">
             <a href="http://www.thinc.in.th/">
                 <img
@@ -80,12 +117,19 @@
                 mapDOM: $('#map-canvas')[0],
                 lineButtonsDOM: $('#bus_line_visible_btn_group')[0],
                 messageDOM: $('#error_msg')[0],
+                <?php
+                if (isset($myLocation)) {
+                    print "myLocation: { lat: " . $myLocation[0];
+                    print " ,lng: " . $myLocation[1];
+                    print " },";
+                }
+                ?>
                 zoomLevel: 16
             });
+            <?php if (isset($_GET['autoRefresh']) && $_GET['autoRefresh'] === 'yes') { ?>
+            setTimeout(function() { location.reload(); }, 1000 * 60 * 60 * 3);
+            <?php } ?>
         });
-        setTimeout(function() {
-            location.reload(); 
-        }, 1000 * 60 * 60 * 3);
     </script>
 </body>
 </html>

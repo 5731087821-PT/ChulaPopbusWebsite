@@ -162,7 +162,7 @@ var PopbusTracker = function() {
 					strokeOpacity: 0,
 					fillColor: '#333333',
 					fillOpacity: 1,
-					rotation: angle
+					rotation: angle + 180
 				};
 			}
 
@@ -672,7 +672,9 @@ var PopbusTracker = function() {
 			position: location,
 			icon: markerIcon,
 			title: nameEn,
-			visible: false
+			visible: false,
+			optimized: false,
+			zIndex: 30
 		});
 
 		var lineList = [];
@@ -879,6 +881,22 @@ var PopbusTracker = function() {
 		}
 	}
 
+	function createStaticMyLocationMarker(mapObj, position) {
+		var myLocationMarker = new google.maps.Marker({
+			position: position,
+			map: mapObj,
+			icon: {
+				url: './images/cu-popbus-map-full/my-location.png',
+				anchor: new google.maps.Point(10, 10),
+				scaledSize: new google.maps.Size(20, 20)
+			},
+			optimized: false,
+			visible: true,
+			clickable: false,
+			zIndex: 40
+		});
+	}
+
 	var PopbusData = function() {
 		var PopbusDataObj = {};
 		var busLineList = [];
@@ -969,6 +987,11 @@ var PopbusTracker = function() {
 						createBusLineVisibilityButtons(options.lineButtonsDOM);
 					}
 
+					if (options.myLocation !== undefined &&
+						options.myLocation !== null) {
+						createStaticMyLocationMarker(mapObj, options.myLocation);
+					}
+
 					return BusMarkerIconManager.waitForImageLoad();
 				}, function(error) {
 					showErrorMessage('Loading Data Fail.', error);
@@ -982,8 +1005,8 @@ var PopbusTracker = function() {
 		return PopbusDataObj;
 	}();
 
-	function initializeGoogleMapUI(mapObj, zoomLevel) {
-		return new google.maps.Map(mapObj, {
+	function initializeGoogleMapUI(mapDOM, zoomLevel) {
+		return new google.maps.Map(mapDOM, {
 			center: { lat: 13.740636, lng: 100.529875 },
 			zoom: zoomLevel || 16,
 			disableDefaultUI: true
@@ -995,8 +1018,8 @@ var PopbusTracker = function() {
 		showMessage('Loading Data...');
 
 		Parse.initialize(
-			'OS97kGW9YxCRuZYxb5uPeCbSmBAToHTOEY7JZn18',
-			'JNYrGMF92XJxleOQrKGx2UAc1feIAmKKYS4pYDDv'
+			'egbuQBruXEK6g00FQgUxC9qj8C4t1soS839nTX8p',
+			'2hVdRsd4QmioSo5tk05u3IA0Nh2xCkhNF13FKhae'
 		);
 		var mainMapObj = initializeGoogleMapUI(options.mapDOM, options.zoomLevel);
 		BusMarkerIconManager.initialize();
